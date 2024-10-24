@@ -1,15 +1,16 @@
-import { useState } from "react";
-
 import viteLogo from "/vite.svg";
 import reactLogo from "./assets/react.svg";
 
 import "./App.css";
+import Counter from "./components/Counter/Counter";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
 		<>
+			<nav>
+				<Counter />
+			</nav>
 			<div>
 				<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
 					<img src={viteLogo} className="logo" alt="Vite logo" />
@@ -20,9 +21,6 @@ function App() {
 			</div>
 			<h1>Vite + React</h1>
 			<div className="card">
-				<button type="button" onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
 				<p>
 					Edit <code>src/App.tsx</code> and save to test HMR
 				</p>
