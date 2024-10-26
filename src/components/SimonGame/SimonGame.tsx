@@ -37,31 +37,37 @@ function SimonGame() {
 	// fonction qui selectionne le bouton cliqué
 	const handleColorClick = (event) => {
 		if (playing) {
-			// récupère l'attribut de la couleur au moment (event) du clic
-			const clickColor = event.target.getAttribute("color");
-			// on vérifie si on clic sur la bonne couleur de la séquence
-			if (sequence[playingIndex] === clickColor) {
-				// Si on a cliqué sur la dernière couleur de la séquence
-				if (playingIndex === sequence.length - 1) {
-					setTimeout(() => {
-						// alors on rappelle toute la séquence
-						setPlayingIndex(0);
-						// et on rajoute une couleur
-						addNewColor();
-					}, 250);
+			// bouton plus sombre au clic
+			event.target.classList.add("opacity-50");
+
+			setTimeout(() => {
+				event.target.classList.remove("opacity-50");
+				// récupère l'attribut de la couleur au moment (event) du clic
+				const clickColor = event.target.getAttribute("color");
+				// on vérifie si on clic sur la bonne couleur de la séquence
+				if (sequence[playingIndex] === clickColor) {
+					// Si on a cliqué sur la dernière couleur de la séquence
+					if (playingIndex === sequence.length - 1) {
+						setTimeout(() => {
+							// alors on rappelle toute la séquence
+							setPlayingIndex(0);
+							// et on rajoute une couleur
+							addNewColor();
+						}, 250);
+					}
+					// tant qu'il reste une couleur à cliquer
+					else {
+						setPlayingIndex(playingIndex + 1);
+					}
 				}
-				// tant qu'il reste une couleur à cliquer
+				// si on a cliqué sur la mauvaise couleur
 				else {
-					setPlayingIndex(playingIndex + 1);
+					// reset
+					resetGame();
+					// partie perdue
+					alert("Perdu !");
 				}
-			}
-			// si on a cliqué sur la mauvaise couleur
-			else {
-				// reset
-				resetGame();
-				// partie perdue
-				alert("Perdu !");
-			}
+			}, 250)
 		}
 	};
 	// fonction qui restart la partie
